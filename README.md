@@ -11,7 +11,7 @@ A simple iOS application to demonstrate a brute force sudoku solver implemented 
 - Open source (https://github.com/linzhao7812/Sudoku)
 
 
-### Getting the source code
+### Getting the Source Code
 
 ##### Option 1: Download Source Code
 
@@ -24,7 +24,7 @@ $ git clone --recursive https://github.com/linzhao7812/Sudoku.git
 ```
 
 
-### What's there
+### What's There
 A Sudoku game is pre-filled in a 9x9 grid. Click "Solve It!" button will solve the game and fill up the open space. A "Reset" button on the top right corner to reset the 9x9 grid with the current Sudoku game. The app also provides three new games to demonstrate how it handles special cases such as an empty grid which will actually fill up the board with a valid solution, or an invalid Sudoku game which will then show an error message. It returns true only when the entire grid is fully solved.
 
 
@@ -67,4 +67,10 @@ SimpleSudoku app starts with a set of pre-defined 9X9 Sudoku games to demonstrat
 ##### UI classes:
 - ViewController.m: A custom UIViewController class to render the application data.
 - Main.storyboard: UI layout of the app. All the buttons, labels are created and constrains are set to support different screen resolutions.
+
+
+
+### Next Step
+1. Improve the searching algorithm by implementing the two tips from: http://www.sudoku.com/ .
+2. Build a Sudoku generator.
 
