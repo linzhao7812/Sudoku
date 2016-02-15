@@ -1,0 +1,146 @@
+//
+//  SudokuSolver.m
+//  SimpleSudoku
+//
+//  Created by Lin Zhao on 2016-02-13.
+//  Copyright © 2016 Lin Zhao. All rights reserved.
+//
+
+#import "SudokuSolver.h"
+#import "Constants.h"
+
+@implementation SudokuSolver
+
+- (BOOL)solve : (TwoDimentionalArray *)array {
+    for (int row = 0; row < ROW_COLUMN_CELL_NUM; row ++) {
+        for (int col = 0; col < ROW_COLUMN_CELL_NUM; col ++) {
+            NSString *value = [array getValueFromArray:row cols:col];
+            if ([value caseInsensitiveCompare:@"."] == NSOrderedSame) {
+                for (int k = 1; k <= ROW_COLUMN_CELL_NUM; k ++) {
+                    [array setValuesToArray:row cols:col value:[NSString stringWithFormat:@"%i", k]];
+                    if ([self isValid:array rows:row cols:col] && [self solve:array]) {
+                        return true;
+                    } else {
+                        [array setValuesToArray:row cols:col value:@"."];
+                    }
+                }
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+- (BOOL)isValid : (TwoDimentionalArray *)array rows:(int)r cols:(int)c {
+    // Check row
+    if (![self isRowValid:array rows:r]) {
+        return false;
+    }
+    
+    // Check col
+    if (![self isColValid:array cols:c]) {
+        return false;
+    }
+    
+    // Check 3x3 grid
+    if (![self isGridValid:array rows:r cols:c]) {
+        return false;
+    }
+    
+    return true;
+}
+
+- (BOOL)isRowValid : (TwoDimentionalArray *)array rows:(int)r {
+    NSMutableArray *row = [NSMutableArray arrayWithCapacity:ROW_COLUMN_CELL_NUM];
+    BOOL b = NO;
+    for (int idx = 0; idx < ROW_COLUMN_CELL_NUM; idx ++) {
+        [row addObject:[NSNumber numberWithBool:b]];
+    }
+    
+    for (int i = 0; i < ROW_COLUMN_CELL_NUM; i ++) {
+        NSString *value = [array getValueFromArray:r cols:i];
+        if ([value caseInsensitiveCompare:@"."] == NSOrderedSame) {
+            continue;
+        }
+        
+        int num = [value intValue];
+        if (num >= 1 && num <= ROW_COLUMN_CELL_NUM) {
+            int idx = num - 1;
+            if ([[row objectAtIndex:idx] boolValue] == b) {
+                [row replaceObjectAtIndex:idx withObject:[NSNumber numberWithBool:YES]];
+            } else {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+- (BOOL)isColValid : (TwoDimentionalArray *)array cols:(int)c {
+    NSMutableArray *col = [NSMutableArray arrayWithCapacity:ROW_COLUMN_CELL_NUM];
+    BOOL b = NO;
+    for (int idx = 0; idx < ROW_COLUMN_CELL_NUM; idx ++) {
+        [col addObject:[NSNumber numberWithBool:b]];
+    }
+    
+    for (int i = 0; i < ROW_COLUMN_CELL_NUM; i ++) {
+        NSString *value = [array getValueFromArray:i cols:c];
+        if ([value caseInsensitiveCompare:@"."] == NSOrderedSame) {
+            continue;
+        }
+        
+        int num = [value intValue];
+        if (num >= 1 && num <= ROW_COLUMN_CELL_NUM) {
+            int idx = num - 1;
+            if ([[col objectAtIndex:idx] boolValue] == b) {
+                [col replaceObjectAtIndex:idx withObject:[NSNumber numberWithBool:YES]];
+            } else {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+- (BOOL)isGridValid : (TwoDimentionalArray *)array rows:(int)r cols:(int)c {
+    NSMutableArray *grid = [NSMutableArray arrayWithCapacity:ROW_COLUMN_CELL_NUM];
+    BOOL b = NO;
+    for (int idx = 0; idx < ROW_COLUMN_CELL_NUM; idx ++) {
+        [grid addObject:[NSNumber numberWithBool:b]];
+    }
+    
+    for (int i = (r/GRID_SIZE)*GRID_SIZE; i < (r/GRID_SIZE)*GRID_SIZE+GRID_SIZE; i ++) {
+        for (int j = (c/GRID_SIZE)*GRID_SIZE; j < (c/GRID_SIZE)*GRID_SIZE+GRID_SIZE; j ++) {
+            NSString *value = [array getValueFromArray:i cols:j];
+            if ([value caseInsensitiveCompare:@"."] == NSOrderedSame) {
+                continue;
+            }
+            
+            int num = [value intValue];
+            if (num >= 1 && num <= ROW_COLUMN_CELL_NUM) {
+                int idx = num - 1;
+                if ([[grid objectAtIndex:idx] boolValue] == b) {
+                    [grid replaceObjectAtIndex:idx withObject:[NSNumber numberWithBool:YES]];
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+    
+    return true;
+}
+
+- (void)printTwoDimentionalArray : (TwoDimentionalArray *)array {
+    for (int i = 0; i < ROW_COLUMN_CELL_NUM; i ++) {
+        for (int j = 0; j < ROW_COLUMN_CELL_NUM; j ++) {
+            NSString *value = [array getValueFromArray:i cols:j];
+            NSLog(@"row:%d, col:%d, value: %@", i, j, value);
+        }
+    }
+}
+
+@end
