@@ -9,18 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "TwoDimentionalArray.h"
 
-
+/**
+ * The implementation of the search algorithm to solve a 9x9 Sudoku game.
+ */
 @interface SudokuSolver : NSObject {
 
 }
 
 - (BOOL)solve : (TwoDimentionalArray *)array;
-- (BOOL)isValid : (TwoDimentionalArray *)array rows:(int)r cols:(int)c;
-
-- (BOOL)isRowValid : (TwoDimentionalArray *)array rows:(int)r;
-- (BOOL)isColValid : (TwoDimentionalArray *)array cols:(int)c;
-- (BOOL)isGridValid : (TwoDimentionalArray *)array rows:(int)r cols:(int)c;
-
 - (void)printTwoDimentionalArray : (TwoDimentionalArray *)array;
 
 @end

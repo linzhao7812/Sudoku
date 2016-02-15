@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
+/**
+ * A definition of a 2-D array implemented to describe the 9X9 sudoku board. 
+ * It helps to set and get values to and from a specific cell.
+ */
 @interface TwoDimentionalArray : NSObject {
     NSMutableDictionary *twoDimensionalArray;
 }

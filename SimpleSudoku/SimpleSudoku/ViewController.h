@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "TwoDimentionalArray.h"
 #import "SudokuSolver.h"
-//#import "SudokuSolver.h"
 
 
-
+/**
+ * A custom UIViewController class to render the application data.
+ */
 @interface ViewController : UIViewController {
 
 @private TwoDimentionalArray *array;
@@ -25,8 +26,6 @@
 
 - (IBAction)resetButtonPressed:(id)sender;
 - (IBAction)solveButtonPressed:(id)sender;
-- (void)renderResults;
-- (void)resetBoard:(NSString*)sudoku;
 - (IBAction)gameIButtonPressed:(id)sender;
 - (IBAction)gameIIButtonPressed:(id)sender;
 - (IBAction)gameIIIButtonPressed:(id)sender;

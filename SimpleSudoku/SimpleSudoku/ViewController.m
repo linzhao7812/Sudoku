@@ -9,14 +9,15 @@
 #import "ViewController.h"
 #import "Constants.h"
 
-
+// Private method definitions
 @interface ViewController ()
-
+- (void)renderResults;
+- (void)resetBoard:(NSString*)sudoku;
+- (void)showAlert;
 @end
 
 @implementation ViewController {
 }
-
 
 @synthesize board;
 
@@ -67,6 +68,9 @@
     [self resetBoard:GAME_III];
 }
 
+/**
+ * Show alert dialog if the Sudoku is invalid
+ */
 - (void)showAlert {
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:@"Error"
@@ -86,6 +90,9 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+/**
+ * Reset the Sudoku grid with a pre-defined game
+ */
 - (void)resetBoard:(const NSString*)sudoku {
     curSudoku = [NSString stringWithFormat:@"%@", sudoku];
     
@@ -106,6 +113,9 @@
     }
 }
 
+/**
+ * Render the solution
+ */
 - (void)renderResults {
     for (int r = 0; r < ROW_COLUMN_CELL_NUM; r ++) {
         for (int c = 0; c < ROW_COLUMN_CELL_NUM; c ++) {

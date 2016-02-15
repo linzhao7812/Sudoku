@@ -6,8 +6,9 @@ A simple iOS application to demonstrate a brute force sudoku solver implemented 
 ### Features
 
 - A native application written in Objective-c for iOS 9 using Xcode 7 Beta
-- Open source (https://github.com/linzhao7812/Sudoku)
+- Interesting yet easy to understand recursive search algorithm 
 - Easy to be deployed on devices such as iPhone, iPad running iOS 9 or up
+- Open source (https://github.com/linzhao7812/Sudoku)
 
 
 ### Getting the source code
@@ -24,7 +25,7 @@ $ git clone --recursive https://github.com/linzhao7812/Sudoku.git
 
 
 ### What's there
-A Sudoku game is pre-filled in a 9x9 grid. Click "Solve It!" button will solve the game and fill up the open space. A "Reset" button on the top right corner to reset the 9x9 grid with the current Sudoku game. The app also provides three new games to demonstrate how it handles special cases such as an empty grid which will actually fill up the board with a valid solution, or an invalid Sudoku game which will then show an error message. 
+A Sudoku game is pre-filled in a 9x9 grid. Click "Solve It!" button will solve the game and fill up the open space. A "Reset" button on the top right corner to reset the 9x9 grid with the current Sudoku game. The app also provides three new games to demonstrate how it handles special cases such as an empty grid which will actually fill up the board with a valid solution, or an invalid Sudoku game which will then show an error message. It returns true only when the entire grid is fully solved.
 
 
 

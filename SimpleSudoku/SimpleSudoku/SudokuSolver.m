@@ -9,18 +9,41 @@
 #import "SudokuSolver.h"
 #import "Constants.h"
 
+// Private methods definitions
+@interface SudokuSolver ()
+- (BOOL)isValid : (TwoDimentionalArray *)array rows:(int)r cols:(int)c;
+- (BOOL)isRowValid : (TwoDimentionalArray *)array rows:(int)r;
+- (BOOL)isColValid : (TwoDimentionalArray *)array cols:(int)c;
+- (BOOL)isGridValid : (TwoDimentionalArray *)array rows:(int)r cols:(int)c;
+@end
+
 @implementation SudokuSolver
 
+/**
+ * Implementation of the searching algorithm in a recursive manner. Each recursice call takes care of
+ * the first open space "." still to be handled. That will be replaced tentatively with a number (from
+ * 1 to 9). If the number is valid, then go recurse which will try the next open space. If it fails, undo
+ * the number replacement, and return false which forces the callers to try the next number. It returns true
+ * only when the entire grid is fully solved.
+ *
+ * @param array A 2-D array pre-filled with a Sudoku game with "." indicating the open space.
+ *
+ * @return BOOL - YES if the game is solved
+ *                 NO if the game is invalid
+ */
 - (BOOL)solve : (TwoDimentionalArray *)array {
     for (int row = 0; row < ROW_COLUMN_CELL_NUM; row ++) {
         for (int col = 0; col < ROW_COLUMN_CELL_NUM; col ++) {
             NSString *value = [array getValueFromArray:row cols:col];
             if ([value caseInsensitiveCompare:@"."] == NSOrderedSame) {
                 for (int k = 1; k <= ROW_COLUMN_CELL_NUM; k ++) {
+                    // Tentatively assign the number to the open space
                     [array setValuesToArray:row cols:col value:[NSString stringWithFormat:@"%i", k]];
+                    // Validate the board and solve the next open space recursively
                     if ([self isValid:array rows:row cols:col] && [self solve:array]) {
                         return true;
                     } else {
+                        // Undo the previous assignment
                         [array setValuesToArray:row cols:col value:@"."];
                     }
                 }
@@ -32,6 +55,16 @@
     return true;
 }
 
+/**
+ * Validate the Sudoku board based on the rules for rows and columns and 3x3 grids.
+ *
+ * @param array A 2-D array pre-filled with a Sudoku game with "." indicating the open space.
+ * @param r row number
+ * @param c column number
+ *
+ * @return BOOL - YES if the boear is still valid
+ *                 NO otherwise
+ */
 - (BOOL)isValid : (TwoDimentionalArray *)array rows:(int)r cols:(int)c {
     // Check row
     if (![self isRowValid:array rows:r]) {
