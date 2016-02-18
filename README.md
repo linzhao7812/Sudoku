@@ -70,7 +70,7 @@ Assume the number of possibilities for each square (i.e., 1~9 in this Sudoku) is
 .
 .
 
-In conclusion, it performs X(n^m) in worst case scenario. 
+In conclusion, it performs O(n^m) in worst case scenario. 
 
 
 
