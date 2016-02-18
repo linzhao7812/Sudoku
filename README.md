@@ -32,7 +32,7 @@ A Sudoku game is pre-filled in a 9x9 grid. Click "Solve It!" button will solve t
 ### Documentation
 SimpleSudoku app starts with a set of pre-defined 9X9 Sudoku games to demonstrate how a brute force searching algorithm was implemented to solve the game or handle the error cases. The key searching algorithm is implemented in a recursive fashion. Each recursive call takes care of the first open space still to be handled. That will be replaced tentatively with a number (from 1 to 9). If the number is valid based on Sudoku rules, then go recurse which will try the next open space. If it fails, undo the number replacement, and return false since any number tried on this search branch is invalid. And this forces the caller (up to the root) to try the next number. 
 
-##### Key class:
+###### Key class:
 - SudokuSolver.m: This contains the implementation of the search algorithm. Below is key function:
 ```Objective-C
 - (BOOL)solve : (TwoDimentionalArray *)array {
@@ -60,31 +60,28 @@ SimpleSudoku app starts with a set of pre-defined 9X9 Sudoku games to demonstrat
 }
 ```
 
+###### Helper classes:
+- TwoDimentionalArray.m: A definition of a 2-D array implemented to describe the 9X9 sudoku board. It helps to set and get values to and from a specific cell.
+- Constants.m: A helper class to define all the constants shared among classes. 
+
+###### UI classes:
+- ViewController.m: A custom UIViewController class to render the application data.
+- Main.storyboard: UI layout of the app. All the buttons, labels are created and constrains are set to support different screen resolutions.
+
+
+### Performance
 ###### Algorithm Complexity (Big-O)
 The algorithm complexity can be seen to work backwards from only one single empty space:
 
 - If there is only one empty space, then it has to work through n possiblities that it have to work through in the worst case. 
 - If there are two empty spaces, then it has to work through n possibilities for the first empty space, and n possibilities for the second empty space for each of the possibilities for the first empty space. 
 - If there three empty spaces, then it has to work through n possibilities for the first empty space, and each of those possibilities will yield a puzzle of two empty spaces that has n^2 possibilities.
-.
-.
-.
+- and so on...
 
 In conclusion, it performs O(n^m) in worst case scenario where n is the number of possibilities for each empty space (i.e., 1~9 in this classic Sudoku), and m is the number of empty spaces on the board (i.e., 81 in worst case in this 9x9 classic Sudoku).
 
 
-
-##### Helper classes:
-- TwoDimentionalArray.m: A definition of a 2-D array implemented to describe the 9X9 sudoku board. It helps to set and get values to and from a specific cell.
-- Constants.m: A helper class to define all the constants shared among classes. 
-
-##### UI classes:
-- ViewController.m: A custom UIViewController class to render the application data.
-- Main.storyboard: UI layout of the app. All the buttons, labels are created and constrains are set to support different screen resolutions.
-
-
-
 ### Next Step
 1. Improve the searching algorithm by implementing the two tips from: http://www.sudoku.com/ .
-2. Build a Sudoku generator.
-
+2. Explore the possibility of replacing UIButton by using UICollectionView to create a grid layout for memory improvement. 
+3. Build a Sudoku generator.
