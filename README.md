@@ -60,6 +60,20 @@ SimpleSudoku app starts with a set of pre-defined 9X9 Sudoku games to demonstrat
 }
 ```
 
+###### Algorithm Complexity (Big-O)
+Assume the number of possibilities for each square (i.e., 1~9 in this Sudoku) is n, and m is number of empty spaces to be filled on the board. This can be seen to work backwards from only one single empty space:
+
+- If there is only one empty space, then it has to work through n possiblities that it have to work through in the worst case. 
+- If there are two empty spaces, then it has to work through n possibilities for the first empty space, and n possibilities for the second empty space for each of the possibilities for the first empty space. 
+- If there three empty spaces, then it has to work through n possibilities for the first empty space, and each of those possibilities will yield a puzzle of two empty spaces that has n^2 possibilities.
+.
+.
+.
+
+In conclusion, it performs X(n^m) in worst case scenario. 
+
+
+
 ##### Helper classes:
 - TwoDimentionalArray.m: A definition of a 2-D array implemented to describe the 9X9 sudoku board. It helps to set and get values to and from a specific cell.
 - Constants.m: A helper class to define all the constants shared among classes. 
