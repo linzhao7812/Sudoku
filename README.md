@@ -61,7 +61,7 @@ SimpleSudoku app starts with a set of pre-defined 9X9 Sudoku games to demonstrat
 ```
 
 ###### Algorithm Complexity (Big-O)
-Assume the number of possibilities for each square (i.e., 1~9 in this Sudoku) is n, and m is number of empty spaces to be filled on the board. This can be seen to work backwards from only one single empty space:
+The algorithm complexity can be seen to work backwards from only one single empty space:
 
 - If there is only one empty space, then it has to work through n possiblities that it have to work through in the worst case. 
 - If there are two empty spaces, then it has to work through n possibilities for the first empty space, and n possibilities for the second empty space for each of the possibilities for the first empty space. 
@@ -70,7 +70,7 @@ Assume the number of possibilities for each square (i.e., 1~9 in this Sudoku) is
 .
 .
 
-In conclusion, it performs O(n^m) in worst case scenario. 
+In conclusion, it performs O(n^m) in worst case scenario where n is the number of possibilities for each empty space (i.e., 1~9 in this classic Sudoku), and m is the number of empty spaces on the board (i.e., 81 in worst case in this 9x9 classic Sudoku).
 
 
 
